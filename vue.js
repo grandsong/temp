@@ -10094,7 +10094,6 @@
   }
 
   function addIfCondition (el, condition) {
-    console.log('condition', el, condition);
     var m;
     if(m = condition.exp.match(assignmentInIfRE)){
       condition.var = m[1];
