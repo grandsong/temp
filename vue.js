@@ -10095,7 +10095,7 @@
 
   function addIfCondition (el, condition) {
     var m;
-    if(m = condition.exp.match(assignmentInIfRE)){
+    if(m = condition.exp && condition.exp.match(assignmentInIfRE)){
       condition.var = m[1];
     }
 
@@ -11058,11 +11058,10 @@
 
     var condition = conditions.shift();
     if (condition.exp) {
-      // (condition.var ? 'var' + condition.var + ' = ' : "") +
       var s = ("(" + condition.exp + ")?" + (genTernaryExp(condition.block)) + ":" + (genIfConditions(conditions, state, altGen, altEmpty)));
       // console.warn(s);
       if(condition.var){
-        s = "function(){var pet; return "+s+"}()"
+        s = "function(){var " + condition.var + "; return "+s+"}()"
       }
       return s;
     } else {
